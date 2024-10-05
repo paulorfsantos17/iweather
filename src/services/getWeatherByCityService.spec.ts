@@ -3,9 +3,10 @@ import { api } from "./api"
 import { getWeatherByCityService } from "./getWeatherByCityService"
 
 describe("SERVICE: getWeatherByCityService",  () =>  {
-  it("should be return weather api data formatted", () => { 
+  it("should be return weather api data formatted",async  () => { 
     jest.spyOn(api, "get").mockResolvedValue({data: mockWeatherAPIResponse })
-    const response = getWeatherByCityService({latitude: 0, longitude: 0})
-    console.log("🚀 ~ it ~ response:", response)
+    const response = await  getWeatherByCityService({latitude: 0, longitude: 0})
+
+    expect(response).toHaveProperty("today")
   })
 })
